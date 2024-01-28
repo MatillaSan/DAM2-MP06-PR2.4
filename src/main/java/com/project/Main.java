@@ -20,35 +20,34 @@ public class Main {
 
       Manager.createSessionFactory();
 
-      Cart refCart1 = Manager.addCart("Cart 1");
-      Cart refCart2 = Manager.addCart("Cart 2");
-      Cart refCart3 = Manager.addCart("Cart 3");
+      Employee refEmp1 = Manager.addEmployee("Employee 1", "Aes", 1000);
+      Employee refEmp2 = Manager.addEmployee("Employee 2", "Bes", 2000);
+      Employee refEmp3 = Manager.addEmployee("Employee 3", "Ces", 3000);
+      Employee refEmp4 = Manager.addEmployee("Employee 4", "Des", 4000);
 
-      Item refItem1 = Manager.addItem("Item 1");
-      Item refItem2 = Manager.addItem("Item 2");
-      Item refItem3 = Manager.addItem("Item 3");
-      Item refItem4 = Manager.addItem("Item 4");
-      Item refItem5 = Manager.addItem("Item 5");
-      Item refItem6 = Manager.addItem("Item 6");
+      Contact refCon1 = Manager.addContact("Contact 1", "ves@a.com");
+      Contact refCon2 = Manager.addContact("Contact 2", "wes@a.com");
+      Manager.addContact("Contact 3", "xes@ga.com");
+      Manager.addContact("Contact 4", "yes@ga.com");
+      Contact refCon5 = Manager.addContact("Contact 5", "zes@ga.com");
 
-      Set<Item> itemsCard1 = new HashSet<Item>();
-      itemsCard1.add(refItem1);
-      itemsCard1.add(refItem2);
-      itemsCard1.add(refItem3);
+      Manager.updateEmployee(refEmp1.getEmployeeId(), refEmp1.getFirstName(), refEmp1.getLastName(), 55);
 
-      Manager.updateCart(refCart1.getCartId(), refCart1.getType(), itemsCard1);
+      Set<Employee> employeesEmp1 = new HashSet<Employee>();
+      employeesEmp1.add(refEmp2);
+      employeesEmp1.add(refEmp3);
+      Manager.updateContact(refCon1.getContactId(), refCon1.getName(), refCon1.getEmail(), employeesEmp1);
 
-      Set<Item> itemsCard2 = new HashSet<Item>();
-      itemsCard2.add(refItem4);
-      itemsCard2.add(refItem5);
+      Set<Employee> employeesEmp2 = new HashSet<Employee>();
+      employeesEmp2.add(refEmp1);
+      employeesEmp2.add(refEmp2);
+      Manager.updateContact(refCon2.getContactId(), refCon1.getName(), refCon1.getEmail(), employeesEmp2);
 
-      Manager.updateCart(refCart2.getCartId(), refCart2.getType(), itemsCard2);
+      Manager.delete(Employee.class, refEmp4.getEmployeeId());
+      Manager.delete(Contact.class, refCon5.getContactId());
 
-      Manager.delete(Cart.class, refCart3.getCartId());
-      Manager.delete(Item.class, refItem6.getItemId());
-
-      System.out.println(Manager.collectionToString(Cart.class, Manager.listCollection(Cart.class)));
-      System.out.println(Manager.collectionToString(Item.class, Manager.listCollection(Item.class)));
+      System.out.println(Manager.collectionToString(Employee.class, Manager.listCollection(Employee.class)));
+      System.out.println(Manager.collectionToString(Contact.class, Manager.listCollection(Contact.class)));
 
       Manager.close();
    }
